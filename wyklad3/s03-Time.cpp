@@ -1,7 +1,7 @@
 
 #include <iostream>
 #include <string>
-#include "s03-Time.h"
+#include "Time.h"
 
 std::string Hour::to_string() 
 {
@@ -71,14 +71,15 @@ auto Hour::time_of_day() const
     return t1; 
 }
 
-void to_string(Time_of_day pora) //Jak zamienic to na funkcje zwracajaca std::string? Jak zamienic wartosc wyliczeniowa na napis?
+auto to_string(Time_of_day pora) -> std::string 
 {
     switch(pora)
     {       
-        case Time_of_day::noc : std::cout << "noc\n"; break;
-        case Time_of_day::rano : std::cout << "rano\n"; break;
-        case Time_of_day::dzien : std::cout << "dzien\n"; break;
-        case Time_of_day::wieczor : std::cout << "wieczor\n"; break;
+        case Time_of_day::noc     :     return  "noc\n";        break;
+        case Time_of_day::rano    :     return  "rano\n";       break;
+        case Time_of_day::dzien   :     return  "dzien\n";      break;
+        case Time_of_day::wieczor :     return  "wieczor\n";    break;
+        default: return "Brak danych";
     }
     
 }
@@ -88,17 +89,17 @@ auto main()->int
     auto h1=Hour{23,58,58};
     for(auto i=0; i<3; i++)
     {
-    std::cout<<h1.to_string()<<"    ";
+    std::cout << h1.to_string()<<"    ";
     
-    to_string(h1.time_of_day());
+    std::cout << to_string(h1.time_of_day());
 
     h1.next_minute();
     }
     for(auto i=0; i<3; i++)
     {
-    std::cout<<h1.to_string()<<"    ";
+    std::cout << h1.to_string()<<"    ";
 
-    to_string(h1.time_of_day());
+    std::cout << to_string(h1.time_of_day());
 
     h1.next_second();
     }
