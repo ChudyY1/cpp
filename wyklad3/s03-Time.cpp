@@ -79,7 +79,7 @@ auto to_string(Time_of_day pora) -> std::string
         case Time_of_day::rano    :     return  "rano\n";       break;
         case Time_of_day::dzien   :     return  "dzien\n";      break;
         case Time_of_day::wieczor :     return  "wieczor\n";    break;
-        default: return "Brak danych";
+        default                   :     return  "Brak danych";
     }
     
 }
