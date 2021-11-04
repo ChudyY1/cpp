@@ -8,7 +8,7 @@ auto Student::to_string() -> std::string
 }
 
 Student::Student(std::string i,std::string n, std::string nr_i, int a_sem, float sr_o)
-    : imie{std::move(i)} //czemu nie imie{i} ?
+    : imie{std::move(i)}
     , nazwisko{std::move(n)}
     , nr_indeksu{std::move(nr_i)}
     , a_semestr{a_sem}
