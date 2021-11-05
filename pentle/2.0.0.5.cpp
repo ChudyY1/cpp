@@ -27,20 +27,22 @@ auto liczba_pierwsza(int a) -> void
     {
         if(a%i == 0) czy_pierwsza++;
     }
-
+	
     if((czy_pierwsza == 0) && (a != 1))
     {
         auto suma = 0;
         for(auto i=2; i <=a; i++)
         {
-           for(auto j=2; j < sqrt(i); j++)
+			auto czy_pierwsza = 0;
+			
+           for(auto j=2; j < i; j++)
            {
-
-                 if((i%j == 0) && (i != 1)) suma += i; 
-                    std::cout << suma << "\n"; 
+                 if(i%j == 0) czy_pierwsza++; 
            }
+           
+           if((czy_pierwsza == 0) && (i != 1))	suma += i; 
         }
-       //std::cout << suma << "\n"; 
+        std::cout << suma << "\n"; 
     }
     else  std::cout << "Liczba " << a << " nie jest liczba pierwsza.\n";
 }
