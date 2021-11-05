@@ -25,11 +25,11 @@ auto pusty_kwadrat(int p) -> void
 	
 	for(auto i = 1; i <= p; i++)
 	{
-		for(auto j = 1; j <= p; j++)
+		for(auto w = 1; w <= p; w++)
 		{
 			if(i == 1 || i == p) std::cout << "*";
-			if((i > 1 && i < p) && (j == 1 || j == p )) std::cout << "*";
-			if((i > 1 && i < p) && (j == 1 || j == p )) std::cout << " "; //zmienic
+			if((i > 1 && i < p) && (w == 1 || w == p )) std::cout << "*";
+			if((i > 1 && i < p) && (w > 1 && w < p ))  std::cout << " ";
 		}
 		std::cout << "\n";
 	}
