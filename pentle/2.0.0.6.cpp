@@ -1,43 +1,27 @@
 #include <iostream>
 #include <string>
 
-auto ask(std::string const prompt) -> int
+auto relacja(int argc, char* argv[]) -> void
 {
-	if(not prompt.empty())
+	auto a = std::stoi(argv[1]);
+	for(auto i=2; i<argc; i++)
 	{
-		std::cout << prompt;
-	}
-	auto value = std::string{};
-	std::getline(std::cin, value);
-	return std::stoi(value);
-}
-
-auto relacja(int a, int b, int c, int d, int e, int f) -> void
-{
-	int tab[5] = {b,c,d,e,f};
-	for(auto i=0; i<5; i++)
-	{
-		if(a == tab[i])
+		if(a == std::stoi(argv[i]))
 		{
-			std::cout << a << " == " << tab[i] <<"\n";
+			std::cout << a << " == " << argv[i] <<"\n";
 		}
-		else if(a > tab[i]) 
+		else if(a > std::stoi(argv[i])) 
 		{
-			std::cout << a << " > " << tab[i] << "\n";
+			std::cout << a << " > " << argv[i] << "\n";
 		}
 		else
-			std::cout << a << " < " << tab[i] << "\n";
+			std::cout << a << " < " << argv[i] << "\n";
 	}
 }
-auto main() -> int
+auto main(int argc, char* argv[]) -> int
 {
-	auto a = ask("podaj liczbe ");
-	auto b = ask("podaj liczbe ");
-	auto c = ask("podaj liczbe ");
-	auto d = ask("podaj liczbe ");
-	auto e = ask("podaj liczbe ");
-	auto f = ask("podaj liczbe ");
-	relacja(a, b, c, d, e, f);
-	 
+	
+	relacja(argc,argv);
+	
 	return 0;
 }
