@@ -3,7 +3,6 @@
 auto memrev(void *tab, size_t size)
 {
 	auto proxy = reinterpret_cast<char*>(tab);
-	char temp;
 	for(auto i = size_t{0}; i < size/2; ++i)
 	{
 		std::swap(proxy[size-i-1], proxy[i]);
