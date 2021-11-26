@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-auto memfrob(void *tab, size_t size)
+auto memfrob(void *tab, size_t size) -> void
 {
 	auto proxy = reinterpret_cast<char*>(tab);
 	auto x = uint8_t{64};
