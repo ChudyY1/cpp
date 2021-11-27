@@ -25,7 +25,7 @@ auto all(void *a, size_t size, bool (*fp)(void*, size_t)) -> bool
 auto main() -> int
 {
 	int tab[3] = {1,1,1};
-	std::cout << all(tab, 3, &funkcja) << "\n";
+	std::cout << all(tab, sizeof(tab)/sizeof(int), &funkcja) << "\n";
 	
 	return 0;
 }
