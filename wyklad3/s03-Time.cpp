@@ -1,9 +1,8 @@
-
 #include <iostream>
 #include <string>
 #include "Time.h"
 
-std::string Hour::to_string() 
+auto Time::to_string() -> std::string
 {
     std::string G;
     if(hour<10) 
@@ -22,7 +21,7 @@ std::string Hour::to_string()
     return G + ":" + M + ":" +S;
 }
 
-auto Hour::next_hour()-> void
+auto Time::next_hour()-> void
 {
     hour++;
     if(hour > 23)
@@ -31,7 +30,7 @@ auto Hour::next_hour()-> void
     }
 }
 
-auto Hour::next_minute()-> void
+auto Time::next_minute()-> void
 {
     minutes++;
     if(minutes > 59)
@@ -41,7 +40,7 @@ auto Hour::next_minute()-> void
     }
 }
 
-auto Hour::next_second()-> void
+auto Time::next_second()-> void
 {
     sec++;
     if(sec > 59)
@@ -51,22 +50,22 @@ auto Hour::next_second()-> void
     }
 }
 
-Hour::Hour(int h, int m, int s)
+Time::Time(int h, int m, int s)
     : hour{h}
     , minutes{m}
     , sec{s}
 {}
 
-auto Hour::time_of_day() const
+auto Time::time_of_day() const
 {
     Time_of_day t1;
-    if(hour<=6) t1 = Time_of_day::noc;
+    if(hour<=6) 		t1 = Time_of_day::noc;
 
-    else if(hour<=9) t1 = Time_of_day::rano;
+    else if(hour<=9) 	t1 = Time_of_day::rano;
 
-    else if(hour<=19) t1 = Time_of_day::dzien;
+    else if(hour<=19) 	t1 = Time_of_day::dzien;
     
-    else    t1 = Time_of_day::wieczor;
+    else    			t1 = Time_of_day::wieczor;
    
     return t1; 
 }
@@ -84,9 +83,150 @@ auto to_string(Time_of_day pora) -> std::string
     
 }
 
-auto main()->int
+//zad. arytmetyka
+auto Time::operator+ (Time const& p)  const -> Time
 {
-    auto h1=Hour{23,58,58};
+	auto h3 = Time{hour, minutes, sec};
+		
+	int h, m, s;
+	if(hour + p.hour > 24)
+	{
+		h = hour + p.hour - 24;
+	}
+	else
+		h = hour + p.hour;
+			
+	if(minutes + p.minutes > 59)
+	{
+		m = minutes + p.minutes - 60;
+		h++;
+	}
+	else
+		m = minutes + p.minutes;
+		
+	if(sec + p.sec > 59)
+	{
+		s = sec + p.sec - 60;
+		m++;
+	}
+	else
+		s = sec + p.sec;
+				
+	h3.hour = h;
+	h3.minutes = m;
+	h3.sec = s;
+		
+	return h3;
+}
+
+auto Time::operator- (Time const& p)  const -> Time
+{
+	auto h3 = Time{hour, minutes, sec};
+	
+	if(h3 < p)
+	{
+		std::cout << "Nie ma ujemnego czasu. Podaj argz1 > argz2" << std::endl;
+		return h3;
+	}	
+	
+	int h, m, s;
+	
+	h = hour - p.hour ;
+			
+	if(minutes - p.minutes < 0)
+	{
+		m = minutes - p.minutes + 60;
+		h--;
+	}
+	else
+		m = minutes - p.minutes;
+		
+	if(sec + p.sec < 0 )
+	{
+		s = sec + p.sec + 60;
+		m--;
+	}
+	else
+		s = sec - p.sec;
+				
+	h3.hour = h;
+	h3.minutes = m;
+	h3.sec = s;
+		
+	return h3;
+}
+
+auto Time::operator< (Time const &p) const -> bool
+{
+
+	if(hour < p.hour)
+	{
+		return true;
+	}
+	else if(hour == p.hour)
+	{
+		if(minutes < p.minutes)
+		{
+			return true;
+		}
+		else if(minutes == p.minutes)
+		{
+			if(sec < p.sec)
+			{
+				return true;
+			}
+			else 
+				return false;
+		}
+	} 
+	return false;
+}
+
+auto Time::operator> (Time const &p) const -> bool
+{
+
+	if(hour > p.hour)
+	{
+		return true;
+	}
+	else if(hour == p.hour)
+	{
+		if(minutes > p.minutes)
+		{
+			return true;
+		}
+		else if(minutes == p.minutes)
+		{
+			if(sec > p.sec)
+			{
+				return true;
+			}
+			else 
+				return false;
+		}
+	} 
+	return false;
+}
+
+auto Time::operator== (Time const &p) const -> bool
+{
+	if(hour == p.hour && minutes == p.minutes && sec == p.sec)
+		return true;
+	
+	return false;
+}
+
+auto Time::operator!= (Time const &p) const -> bool
+{
+	if(hour == p.hour && minutes == p.minutes && sec == p.sec)
+		return false;
+	
+	return true;
+}
+
+auto main() -> int
+{
+    auto h1 = Time{23,58,58};
     for(auto i=0; i<3; i++)
     {
     std::cout << h1.to_string()<<"    ";
@@ -104,6 +244,41 @@ auto main()->int
     h1.next_second();
     }
    
+   //zadanie ARYTMETYKA
+   auto h2 = Time{12,1,59};
+   auto h3 = Time{5,30,1};
+   
+   std::cout << std::endl; 
+   std::cout << h2.to_string()<< std::endl;
+   std::cout << h3.to_string()<< " + " << std::endl;
+   std::cout << (h3 + h2).to_string() << std::endl; 
+   
+   std::cout << std::endl;
+   std::cout << h2.to_string()<< std::endl;
+   std::cout << h3.to_string()<< " - " << std::endl;
+   std::cout << (h2 - h3).to_string() << std::endl; 
+   
+   std::cout << std::endl;
+   std::cout << h2.to_string()<< std::endl;
+   std::cout << h3.to_string()<< " < " << std::endl;
+   std::cout << (h2 < h3) << std::endl; 
+   
+   std::cout << std::endl;
+   std::cout << h2.to_string()<< std::endl;
+   std::cout << h3.to_string()<< " > " << std::endl;
+   std::cout << (h2 > h3) << std::endl; 
+
+   std::cout << std::endl;
+   std::cout << h2.to_string()<< std::endl;
+   std::cout << h3.to_string()<< " = " << std::endl;
+   std::cout << (h2 == h3) << std::endl;
     
+   std::cout << std::endl;
+   std::cout << h2.to_string()<< std::endl;
+   std::cout << h3.to_string()<< " != " << std::endl;
+   std::cout << (h2 != h3) << std::endl; 
+   
+    
+   
     return 0;
 }
