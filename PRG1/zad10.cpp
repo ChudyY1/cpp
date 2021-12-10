@@ -42,7 +42,6 @@ auto box_print(std::string napis, std::string* imiona , int ilosc) -> void
 				}
 			}
 			std::cout << "*\n";
-			//if(i != ilosc) std::cout<<
 		}
 	}
 }
