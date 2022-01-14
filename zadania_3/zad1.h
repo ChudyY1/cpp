@@ -26,10 +26,11 @@ class Prostokat
 public:
 	Prostokat(int, int, int, int);
 	Prostokat(Punkt const&, Punkt const&);
+	~Prostokat();
 	
 	auto show() -> void;
 	auto pole_powierzchni() -> int;
-	auto punkt_w_prostokacie() -> bool;
+	auto punkt_w_prostokacie(Punkt) -> bool;
 	
 };
 	

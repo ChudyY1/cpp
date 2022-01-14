@@ -71,10 +71,13 @@ Prostokat::Prostokat(Punkt const& p1, Punkt const& p2)
 	prawy_dolny_w.setXY(p2);
 }
 
+Prostokat::~Prostokat()
+{}
+
 auto Prostokat::show() -> void
 {
-	std::cout << "Wspolrzedne prostokata to (" << lewy_gorny_w.getX() << ", " << lewy_gorny_w.getY()
-			  << ", " << prawy_dolny_w.getX()  << ", " << prawy_dolny_w.getY() << ")\n";
+	std::cout << "lewy gorny wierzcholek " << lewy_gorny_w.getX() << ", " << lewy_gorny_w.getY()
+			  << ", prawy dolny wierzcholek " << prawy_dolny_w.getX()  << ", " << prawy_dolny_w.getY() << ")\n";
 }
 
 auto Prostokat::pole_powierzchni() -> int
@@ -87,9 +90,16 @@ auto Prostokat::pole_powierzchni() -> int
 	return dlugosc*wysokosc;
 }
 
-auto Prostokat::punkt_w_prostokacie() -> bool
+auto Prostokat::punkt_w_prostokacie(Punkt p) -> bool
 {
 	
+	if(p.getX() > lewy_gorny_w.getX() && p.getX() < prawy_dolny_w.getX()
+	    && p.getY() < lewy_gorny_w.getY() && p.getY() > prawy_dolny_w.getY() )
+	    {
+			return true;
+		}
+		
+		return false;
 }
 
 auto main() -> int
@@ -131,6 +141,8 @@ auto main() -> int
 	auto p4 = Punkt(1,0);
 	auto p5 = Punkt(4,-3);
 	
+	auto p6 = Punkt(2,-2);
+	
 	auto prostokat1 = Prostokat( p4.getX(), p4.getY(), p5.getX(), p5.getY() );
 	auto prostokat2 = Prostokat( p4, p5 );
 	
@@ -139,6 +151,8 @@ auto main() -> int
 	
 	std::cout << "Pole= " << prostokat1.pole_powierzchni() << '\n';
 	std::cout << "Pole= " << prostokat2.pole_powierzchni() << '\n';
+	
+	std::cout << "Czy w Prost: " << prostokat1.punkt_w_prostokacie( p6 ) << '\n';
 	
 	return 0;
 }
